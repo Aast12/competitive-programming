@@ -8,4 +8,10 @@
 
 # Local History for Visual Studio Code
 .history/
+
+*.in
+main
+.DS_Store
+
+
 © 2020 GitHub, Inc.
