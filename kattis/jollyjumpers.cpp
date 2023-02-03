@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string.h>
+#include <vector>
 #define MAXN 3000
 using namespace std;
 
@@ -8,9 +9,8 @@ int main() {
 
     while (cin >> n) {
         int curr, prev, count = 0;
-        bool appears[MAXN];
 
-        memset(appears, 0, sizeof(appears));
+        vector<bool> appears(MAXN, 0);
 
         for (int i = 0; i < n; i++) {
             cin >> curr;
