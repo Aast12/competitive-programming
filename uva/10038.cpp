@@ -1,5 +1,6 @@
 #include <iostream>
 
+
 using namespace std;
 
 int main() {
@@ -14,7 +15,7 @@ int main() {
         for (int i = 0; i < n; i++) {
             cin >> aux;
             if (i != 0) {
-                int ins = abs(aux_p - aux);
+                int ins = fabs(aux_p - aux);
                 if (ins >= 1 && ins < n && !diffs[ins]) {
                     diffs[ins] = true;
                     count++;
