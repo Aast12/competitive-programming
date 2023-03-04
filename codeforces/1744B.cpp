@@ -26,7 +26,6 @@ int main() {
 
         while (q--) {
             cin >> query >> x;
-
             if (query == 0) {
                 total_sum += x * even_count;
                 if (x & 1) {

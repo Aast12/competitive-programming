@@ -1,7 +1,10 @@
 {
     "files.associations": {
+        "*.ejs": "html",
         "ostream": "cpp",
         "algorithm": "cpp",
-        "vector": "cpp"
-    }
+        "vector": "cpp",
+        "complex": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "enabled"
 }
