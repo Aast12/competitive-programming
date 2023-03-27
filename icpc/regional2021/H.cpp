@@ -10,14 +10,17 @@ typedef unsigned long long ull;
 
 typedef vector<ull> VLL;
 typedef vector<VLL> VVLL;
-typedef vector<int> VI;
+template<class T>
+using mat = vector<vector<T>>;
 
-// credits Stanford ICPC Notebook
-ull MinCostMatching(const VVLL &cost, VI &Lmate, VI &Rmate) {
+typedef vector<int> vi;
+
+template<class TCost>
+TCost MinCostMatching(const mat<TCost> &cost, vi &Lmate, vi &Rmate) {
+    typedef vector<TCost> vc;
     int n = int(cost.size());
     // construct dual feasible solution
-    VLL u(n);
-    VLL v(n);
+    vc u(n), v(n);
     for (int i = 0; i < n; i++) {
         u[i] = cost[i][0];
         for (int j = 1; j < n; j++) u[i] = min(u[i], cost[i][j]);
@@ -26,9 +29,10 @@ ull MinCostMatching(const VVLL &cost, VI &Lmate, VI &Rmate) {
         v[j] = cost[0][j] - u[0];
         for (int i = 1; i < n; i++) v[j] = min(v[j], cost[i][j] - u[i]);
     }
+
     // construct primal solution satisfying complementary slackness
-    Lmate = VI(n, -1);
-    Rmate = VI(n, -1);
+    Lmate = vi(n, -1);
+    Rmate = vi(n, -1);
     int mated = 0;
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
@@ -41,9 +45,9 @@ ull MinCostMatching(const VVLL &cost, VI &Lmate, VI &Rmate) {
             }
         }
     }
-    VLL dist(n);
-    VI dad(n);
-    VI seen(n);
+
+    vc dist(n);
+    vi dad(n), seen(n);
     // repeat until primal solution is feasible
     while (mated < n) {
         // find an unmatched left node
@@ -94,11 +98,11 @@ ull MinCostMatching(const VVLL &cost, VI &Lmate, VI &Rmate) {
         Lmate[s] = j;
         mated++;
     }
-    double value = 0;
+    
+    TCost value = 0;
     for (int i = 0; i < n; i++) value += cost[i][Lmate[i]];
     return value;
 }
-
 int main() {
     int n;
     cin >> n;
@@ -125,7 +129,7 @@ int main() {
         }
     }
 
-    VI lmate, rmate;
+    vi lmate, rmate;
 
-    cout << MinCostMatching(cost, lmate, rmate) << endl;
+    cout << MinCostMatching<ull>(cost, lmate, rmate) << endl;
 }
